@@ -64,7 +64,7 @@ entries = []
 for i in range(100):
     table_entry = browser.find_elements(By.XPATH, f'//*[@id="ContentPlaceHolder1_Gridlatestannoc_hypertext_{i}"]')
     try:
-        entries.append(table_entry[0].text)
+        entries.insert(0, table_entry[0].text)
     except IndexError:
         break
 
