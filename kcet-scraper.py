@@ -16,40 +16,38 @@ Supported browsers:
 1 Chrome
 2 Firefox
 3 Chromium
-4 Brave
-5 Microsoft Edge
-6 Internet Explorer
+4 Microsoft Edge
 """)
-browser_choice = input("Do you use chrome or chromium or firefox or edge? ")
+browser_choice = input("Enter your choice: ")
 
 # Download the required driver automatically
-if browser_choice.lower() == "chrome":
+if browser_choice.lower() == "1":
     from selenium.webdriver.chrome.service import Service as ChromeService
     from webdriver_manager.chrome import ChromeDriverManager
 
     browser = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
 
-elif browser_choice.lower() == "chromium":
+elif browser_choice.lower() == "2":
+    from selenium.webdriver.firefox.service import Service as FirefoxService
+    from webdriver_manager.firefox import GeckoDriverManager
+    browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+
+elif browser_choice.lower() == "3":
     from selenium import webdriver
     from selenium.webdriver.chrome.service import Service as ChromiumService
     from webdriver_manager.chrome import ChromeDriverManager
     from webdriver_manager.core.utils import ChromeType
 
     browser = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
-
-elif browser_choice.lower() == "firefox":
-    from selenium.webdriver.firefox.service import Service as FirefoxService
-    from webdriver_manager.firefox import GeckoDriverManager
-    browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
     
-elif browser_choice.lower() == "edge":
+elif browser_choice.lower() == "4":
     from selenium.webdriver.edge.service import Service as EdgeService
     from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
     browser = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
 
 else:
-    print("Choose between chrome, firefox and edge")
+    print("Choose a number from 1 to 4")
     exit(1)
 
 # Open up the URL
