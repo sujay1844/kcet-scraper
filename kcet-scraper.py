@@ -30,7 +30,11 @@ if browser_choice.lower() == "1":
 elif browser_choice.lower() == "2":
     from selenium.webdriver.firefox.service import Service as FirefoxService
     from webdriver_manager.firefox import GeckoDriverManager
-    browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
+    from selenium.webdriver.firefox.options import Options
+    firefox_options = Options()
+    # Disable image loading for better performance
+    firefox_options.set_preference('permissions.default.image', 2)
+    browser = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()), options=firefox_options)
 
 elif browser_choice.lower() == "3":
     from selenium import webdriver
@@ -56,6 +60,12 @@ browser.get(URL)
 
 # Change language to english
 time.sleep(0.1)
+try:
+    browser.find_element(By.XPATH, "/html/body/nav/button").click()
+except Exception as e:
+    print()
+
+time.sleep(0.1)
 browser.find_element(By.XPATH, '/html/body/nav/div/form/div[3]/select/option[2]').click()
 time.sleep(0.1)
 
@@ -69,4 +79,5 @@ for i in range(100):
         break
 
 browser.close()
+print("\nEntries:\n")
 print(*entries, sep="\n")
