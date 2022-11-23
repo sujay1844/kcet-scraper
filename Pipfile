@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 selenium = "==4.5.0"
 webdriver-manager = "==3.8.3"
+requests = "*"
+beautifulsoup4 = "*"
+notify2 = "*"
 
 [dev-packages]
 
